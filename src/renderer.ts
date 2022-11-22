@@ -79,7 +79,7 @@ export function renderSensitive(obj: Convict.SchemaObj<unknown>): string {
 
 export function renderFormat(obj: Convict.SchemaObj<unknown>): string {
     if (Array.isArray(obj.format)) {
-        return obj.format.join(" \\| ");
+        return obj.format.join(" \| ");
     }
 
     if (primitiveConstructors.includes(obj.format as any)) {
