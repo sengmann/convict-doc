@@ -81,7 +81,7 @@ const otherSchema = {
   },
 };
 
-console.log(renderDoc(configSchema));
+console.log(renderDoc(configSchema, ['name', 'doc']));
 
 console.log(renderDoc(otherSchema));
 
