@@ -74,7 +74,7 @@ export function renderNullable(obj: Convict.SchemaObj<unknown>): string {
 }
 
 export function renderSensitive(obj: Convict.SchemaObj<unknown>): string {
-    return `${obj.nullable ?? false}`;
+    return `${obj.sensitive ?? false}`;
 }
 
 export function renderFormat(obj: Convict.SchemaObj<unknown>): string {
