@@ -3,7 +3,7 @@
   "version": "1.1.0",
   "description": "",
   "bin": {
-    "convict-doc": "./src/bin/convict-doc.ts"
+    "convict-doc": "bin/convict-doc.ts"
   },
   "main": "src/index.ts",
   "type": "module",
@@ -31,6 +31,7 @@
     "typescript": "^4.9.3"
   },
   "dependencies": {
+    "tsx": "^4.19.4",
     "yargs": "^17.7.2"
   }
 }

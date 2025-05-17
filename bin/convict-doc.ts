@@ -1,10 +1,10 @@
-#!/usr/bin/env node
+#!/usr/bin/env tsx
 
 import yargs from "yargs";
 import { resolve } from "node:path";
 import { existsSync } from "node:fs";
 import { writeFile } from "node:fs/promises";
-import { renderDoc } from "../renderer";
+import { renderDoc } from "../src";
 import * as prettier from "prettier";
 
 const args = yargs(process.argv.slice(2))
@@ -30,7 +30,7 @@ const args = yargs(process.argv.slice(2))
 const inputPath = args.input;
 const outputPath = args.output;
 
-const absolutePath = resolve(process.cwd() + "/" + inputPath);
+const absolutePath = resolve(process.cwd(), inputPath);
 
 if (!existsSync(absolutePath)) {
   console.error(`File ${absolutePath} does not exist`);
@@ -51,7 +51,7 @@ const output = args.pretty
   : markdown;
 
 if (outputPath) {
-  const outputAbsolutePath = resolve(process.cwd() + "/" + outputPath);
+  const outputAbsolutePath = resolve(process.cwd(), outputPath);
   await writeFile(outputAbsolutePath, output, "utf-8");
 } else {
   console.log(output);
