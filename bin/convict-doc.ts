@@ -11,16 +11,19 @@ const args = yargs(process.argv.slice(2))
   .options({
     input: {
       type: "string",
+      alias: "i",
       demandOption: true,
       description: "Path to the config file",
     },
     output: {
       type: "string",
+      alias: "o",
       demandOption: false,
       description: "Path to the output file",
     },
     pretty: {
       type: "boolean",
+      alias:"p",
       default: false,
       description: "Pretty print the output",
     },
