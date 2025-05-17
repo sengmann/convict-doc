@@ -1,54 +1,58 @@
 #!/usr/bin/env node
 
-import yargs from 'yargs';
-import { resolve} from 'node:path'
-import {existsSync} from 'node:fs'
-import {writeFile} from 'node:fs/promises'
-import {renderDoc} from "../renderer";
-import * as prettier from 'prettier';
+import yargs from "yargs";
+import { resolve } from "node:path";
+import { existsSync } from "node:fs";
+import { writeFile } from "node:fs/promises";
+import { renderDoc } from "../renderer";
+import * as prettier from "prettier";
 
-const args = yargs(process.argv.slice(2)).options({
+const args = yargs(process.argv.slice(2))
+  .options({
     input: {
-        type: 'string',
-        demandOption: true,
-        description: 'Path to the config file',
+      type: "string",
+      demandOption: true,
+      description: "Path to the config file",
     },
     output: {
-        type: 'string',
-        demandOption: false,
-        description: 'Path to the output file',
+      type: "string",
+      demandOption: false,
+      description: "Path to the output file",
     },
     pretty: {
-        type: 'boolean',
-        default: false,
-        description: 'Pretty print the output',
-    }
-}).parseSync()
+      type: "boolean",
+      default: false,
+      description: "Pretty print the output",
+    },
+  })
+  .parseSync();
 
 const inputPath = args.input;
 const outputPath = args.output;
 
-const absolutePath = resolve(process.cwd() + '/' + inputPath);
+const absolutePath = resolve(process.cwd() + "/" + inputPath);
 
 if (!existsSync(absolutePath)) {
-    console.error(`File ${absolutePath} does not exist`);
-    process.exit(1);
+  console.error(`File ${absolutePath} does not exist`);
+  process.exit(1);
 }
 
 const config = (await import(absolutePath)).default;
 
 if (!config) {
-    console.error(`File ${absolutePath} does not export a default value`);
-    process.exit(1);
+  console.error(`File ${absolutePath} does not export a default value`);
+  process.exit(1);
 }
 
-const markdown = renderDoc(config)
+const markdown = renderDoc(config);
 
-const output = args.pretty ? await prettier.format(markdown, {parser: "markdown"}) : markdown;
+const output = args.pretty
+  ? await prettier.format(markdown, { parser: "markdown" })
+  : markdown;
 
 if (outputPath) {
-    const outputAbsolutePath = resolve(process.cwd() + '/' + outputPath);
-    await writeFile(outputAbsolutePath, output, 'utf-8');
+  const outputAbsolutePath = resolve(process.cwd() + "/" + outputPath);
+  await writeFile(outputAbsolutePath, output, "utf-8");
 } else {
-    console.log(output);
+  console.log(output);
 }
