@@ -24,11 +24,12 @@ convict-doc --input <schema-file> [--output <output-file>] [--pretty]
 
 ### Options
 
-| Option         | Alias | Required | Description                                             |
-|----------------|-------|----------|---------------------------------------------------------|
-| --input        | -i    | Yes      | Path to the Convict schema file (must export `default`) |
-| --output       | -o    | No       | Path to write the generated Markdown file               |
-| --pretty       | -p    | No       | Pretty-print the Markdown output                        |
+| Option         | Alias | Required | Description                                                                                  |
+|----------------|-------|----------|----------------------------------------------------------------------------------------------|
+| --input        | -i    | Yes      | Path to the Convict schema file (must export `default`)                                      |
+| --output       | -o    | No       | Path to write the generated Markdown file                                                    |
+| --pretty       | -p    | No       | Pretty-print the Markdown output                                                             |
+| --order        | -r    | No       | Column order for the Markdown table. Accepts multiple values (e.g. `--order name env`).      |
 
 ### Example
 
@@ -47,6 +48,9 @@ convict-doc -i ./config/schema.js -o ./docs/config.md -p
 - The input file must export the Convict schema as its default export.
 - If `--output` is not specified, the documentation is printed to stdout.
 - Use `--pretty` to format the Markdown output using Prettier.
+- The `--order` option lets you customize the columns and their order in the Markdown table.  
+    Valid values: `name`, `default`, `arg`, `env`, `format`, `nullable`, `sensitive`, `doc`.
+- If `--order` is not specified, the default order is used.
 
 ## API Usage
 
@@ -55,7 +59,7 @@ Simply pass the Convict schema object into the `renderDoc`-function
 ```ts
 import {renderDoc} from "convict-doc"
 
-const configSchema: Convict.Schema<YourSchema>;
+const configSchema: Convict.Schema<YourSchema> = {};
 
 const documentation = renderDoc(configSchema)
 
