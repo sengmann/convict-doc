@@ -1,7 +1,7 @@
 import * as Convict from "convict";
 import { isSchemaObject, primitiveConstructors } from "./utils";
 
-const defaultOrder = [
+export const defaultOrder = [
   "name",
   "default",
   "arg",

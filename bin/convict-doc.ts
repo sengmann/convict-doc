@@ -5,6 +5,7 @@ import { resolve } from "node:path";
 import { existsSync } from "node:fs";
 import { writeFile } from "node:fs/promises";
 import { renderDoc } from "../src";
+import { defaultOrder } from "../src/renderer";
 import * as prettier from "prettier";
 
 const args = yargs(process.argv.slice(2))
@@ -23,16 +24,20 @@ const args = yargs(process.argv.slice(2))
     },
     pretty: {
       type: "boolean",
-      alias:"p",
+      alias: "p",
       default: false,
       description: "Pretty print the output",
+    },
+    order: {
+      type: "array",
+      alias: "r",
+      description: `Column order for the Markdown table. Valid values are "name", "default", "arg", "env", "format", "nullable", "sensitive", "doc",`,
+      default: defaultOrder,
     },
   })
   .parseSync();
 
-const inputPath = args.input;
-const outputPath = args.output;
-
+const { input: inputPath, output: outputPath, pretty, order } = args;
 const absolutePath = resolve(process.cwd(), inputPath);
 
 if (!existsSync(absolutePath)) {
@@ -47,9 +52,9 @@ if (!config) {
   process.exit(1);
 }
 
-const markdown = renderDoc(config);
+const markdown = renderDoc(config, order as string[]);
 
-const output = args.pretty
+const output = pretty
   ? await prettier.format(markdown, { parser: "markdown" })
   : markdown;
 
