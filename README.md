@@ -1,26 +1,11 @@
 # convict-doc
-converts a Convict schema into rendered documentation. At this Moment it will be rendered as a markdown table. 
 
-Perhaps in the future other formats are added.
+Easily generate Markdown documentation from your [Convict](https://github.com/mozilla/node-convict) schema.
 
-## API Usage
-
-Simply pass the Convict schema object into the `renderDoc`-function
-
-```ts
-import {renderDoc} from "convict-doc"
-
-const configSchema: Convict.Schema<YourSchema>;
-
-const documentation = renderDoc(configSchema)
-
-console.log(documentation)
-```
+Currently, documentation is rendered as a Markdown table.  
+Other output formats may be supported in the future.
 
 ## CLI Usage Guide:
-
-### Description
-`convict-doc` generates Markdown documentation from a Convict schema file.
 
 ### Installation
 Install globally (if published to npm):
@@ -63,6 +48,16 @@ convict-doc -i ./config/schema.js -o ./docs/config.md -p
 - If `--output` is not specified, the documentation is printed to stdout.
 - Use `--pretty` to format the Markdown output using Prettier.
 
----
+## API Usage
 
-For more details, see the project README.
+Simply pass the Convict schema object into the `renderDoc`-function
+
+```ts
+import {renderDoc} from "convict-doc"
+
+const configSchema: Convict.Schema<YourSchema>;
+
+const documentation = renderDoc(configSchema)
+
+console.log(documentation)
+```
