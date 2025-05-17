@@ -1,6 +1,6 @@
 import * as Convict from "convict";
 
-interface Config {
+export interface Config {
   env: string;
   database: {
     port: number;
@@ -9,7 +9,7 @@ interface Config {
   };
 }
 
-const configSchema: Convict.Schema<Config> = {
+export const configSchema: Convict.Schema<Config> = {
   env: {
     default: "TEST",
     format: ["TEST", "PROD"],
@@ -25,7 +25,7 @@ const configSchema: Convict.Schema<Config> = {
     port: {
       env: "DB_PORT",
       default: 3333,
-      format: "Port",
+      format: PortGreaterThausend,
       doc: "the port of foo",
     },
     pw: {
@@ -40,3 +40,7 @@ const configSchema: Convict.Schema<Config> = {
 };
 
 export default configSchema;
+
+function PortGreaterThausend(port: string): never {
+  throw new Error("not implented");
+}
