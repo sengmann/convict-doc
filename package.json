@@ -16,6 +16,10 @@
     "configuration",
     "documentation"
   ],
+  "engines": {
+    "node": ">=18.0.0",
+    "pnpm": ">=10"
+  },
   "author": "Sascha Engmann",
   "repository": {
     "type": "git",
