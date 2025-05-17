@@ -8,10 +8,8 @@
   "main": "src/index.ts",
   "type": "module",
   "scripts": {
-    "build": "tsc",
     "format": "prettier --write \"src/**/*.ts\"",
-    "postbuild": "chmod +x dist/bin/convict-doc.js",
-    "demo": "ts-node src/demo.ts"
+    "demo": "tsx src/demo.ts"
   },
   "keywords": [
     "convict",
