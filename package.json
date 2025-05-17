@@ -1,13 +1,22 @@
 {
   "name": "convict-doc",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "",
-  "main": "dist/index.js",
+  "bin": {
+    "convict-doc": "./src/bin/convict-doc.ts"
+  },
+  "main": "src/index.ts",
+  "type": "module",
   "scripts": {
     "build": "tsc",
+    "postbuild": "chmod +x dist/bin/convict-doc.js",
     "demo": "ts-node src/demo.ts"
   },
-  "keywords": ["convict", "configuration", "documentation"],
+  "keywords": [
+    "convict",
+    "configuration",
+    "documentation"
+  ],
   "author": "Sascha Engmann",
   "repository": {
     "type": "git",
@@ -16,7 +25,11 @@
   "license": "MIT",
   "devDependencies": {
     "@types/convict": "^6.1.1",
-    "ts-node": "^10.9.1",
+    "@types/yargs": "^17.0.33",
+    "prettier": "^3.5.3",
     "typescript": "^4.9.3"
+  },
+  "dependencies": {
+    "yargs": "^17.7.2"
   }
 }

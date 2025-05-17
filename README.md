@@ -1,7 +1,7 @@
 # convict-doc
 converts a Convict schema into rendered documentation. At this Moment it will be rendered as a markdown table. 
 
-Perhabs in the future other formats are added.
+Perhaps in the future other formats are added.
 
 ## Usage
 
